@@ -84,7 +84,6 @@ async def refnc(client, message):
             file = (message.document or message.video or message.audio)
             if not file:
                 return
-            await message.reply_text("12")
             if file.file_size > 2000 * 1024 * 1024:
                 await client.copy_message(sydtg, message.chat.id, message.id)
                 await message.delete()
@@ -93,7 +92,6 @@ async def refnc(client, message):
                 await client.copy_message(Syd_T_G, message.chat.id, message.id)
                 await message.delete()
                 return
-            await message.reply_text("13")
             file_data = {
                 "file_id": file.file_id,
                 "file_name": file.file_name,
@@ -102,12 +100,9 @@ async def refnc(client, message):
                 "message_id": message.id,
                 "chat_id": message.chat.id,
             }
-            await message.reply_text("14")
             await db.add_to_queue(file_data)
-            await message.reply_text("15")
             if not processing:
                 processing = True
-                await message.reply_text("17")
                 await process_queue(client)
             await message.reply_text("1")
         except Exception as e:
@@ -528,7 +523,7 @@ async def autosydd(client, file_details):
         #syd = rearrange_string(sydy, sydyy)
         syd = sydy
         message = await client.get_messages(file_details["chat_id"], file_details["message_id"])
-        media = getattr(message, message.media.value)
+        media = message.document or message.video or message.audio
         sydt_g = [
             '[Tam', '[Tamil', '[Tel', '[Telugu', '[Kan', '[Kannada', '[Mal', '[Malayalam',
             '[Eng', '[English', '[Hin', '[Hindi', '[Mar', '[Marathi', '[Ben', '[Bengali',
