@@ -80,7 +80,6 @@ async def refnc(client, message):
     syd_ids = {MRSSSYD, MRSSYD, MRSSSSYD, MRSSSSSYD, MRSYD5}
     if message.chat.id in syd_ids:
         try:
-            await message.reply_text("1")
             file = (message.document or message.video or message.audio)
             if not file:
                 return
@@ -104,7 +103,6 @@ async def refnc(client, message):
             if not processing:
                 processing = True
                 await process_queue(client)
-            await message.reply_text("1")
         except Exception as e:
             await message.reply_text(f"❌ Error: {e}")
 
