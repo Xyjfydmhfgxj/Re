@@ -80,7 +80,7 @@ async def refnc(client, message):
     syd_ids = {MRSSSYD, MRSSYD, MRSSSSYD, MRSSSSSYD, MRSYD5}
     if message.chat.id in syd_ids:
         try:
-            file = getattr(message, message.media.value)
+            file = (message.document or message.video or message.audio)
             if not file:
                 return
             if file.file_size > 2000 * 1024 * 1024:
