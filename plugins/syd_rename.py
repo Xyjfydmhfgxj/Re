@@ -257,6 +257,11 @@ syyydtg_map = {
     'Lat': 'Latin', 'Latin': 'Latin'
 }
 
+@Client.on_message(filters.command("clear"))
+async def cleaar(client, message):
+    await db.clear_queue()
+    await message.reply_text("Done")
+    
 @Client.on_message(filters.command("doit"))
 async def doit(client, message):
     global processing
@@ -545,7 +550,7 @@ async def autosydd(client, file_details):
             if not any(x.startswith(mrsyd) for mrsyd in mrsyds) and not x.startswith('@')
         ])
         sy = -1002498086501
-        filesize = humanize.naturalsize(media.file_size)
+        filesize = humanize.naturalsize(file_details['file_size'])
         mrsyd = filename.rsplit('-', 1)  # Split filename from the right at the last hyphen
         new_name = mrsyd[0].strip() if len(mrsyd) > 1 and any(term in mrsyd[1].strip().lower() for term in sydd) else filename
         for item in remove_list:
