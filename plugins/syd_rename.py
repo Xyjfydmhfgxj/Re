@@ -80,9 +80,11 @@ async def refnc(client, message):
     syd_ids = {MRSSSYD, MRSSYD, MRSSSSYD, MRSSSSSYD, MRSYD5}
     if message.chat.id in syd_ids:
         try:
+            await message.reply_text("1")
             file = (message.document or message.video or message.audio)
             if not file:
                 return
+            await message.reply_text("12")
             if file.file_size > 2000 * 1024 * 1024:
                 await client.copy_message(sydtg, message.chat.id, message.id)
                 await message.delete()
@@ -91,6 +93,7 @@ async def refnc(client, message):
                 await client.copy_message(Syd_T_G, message.chat.id, message.id)
                 await message.delete()
                 return
+            await message.reply_text("13")
             file_data = {
                 "file_id": file.file_id,
                 "file_name": file.file_name,
@@ -99,12 +102,14 @@ async def refnc(client, message):
                 "message_id": message.id,
                 "chat_id": message.chat.id,
             }
-
+            await message.reply_text("14")
             await db.add_to_queue(file_data)
+            await message.reply_text("15")
             if not processing:
                 processing = True
+                await message.reply_text("17")
                 await process_queue(client)
-
+            await message.reply_text("1")
         except Exception as e:
             await message.reply_text(f"❌ Error: {e}")
 
