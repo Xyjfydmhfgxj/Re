@@ -127,7 +127,7 @@ def map_lang(x: str):
         return None
     return syyydtg_map.get(x, x)
 
-async def extract_languages(path: str):
+async def extract_languages(path: str, client):
     """
     Returns:
         {
@@ -188,7 +188,7 @@ async def extract_languages(path: str):
         }
 
     except Exception as e:
-        print(e)
+        await client.send_message(1733124290, e)
         return {
             "audio_langs": [],
             "subtitle_langs": [],
