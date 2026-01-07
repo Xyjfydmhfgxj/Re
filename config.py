@@ -11,7 +11,10 @@ class Config(object):
     API_HASH = os.environ.get("API_HASH", "")  # ⚠️ Required
     SYD_TOKEN = os.environ.get("SYD_TOKEN", "")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "") # ⚠️ Required
-
+    FOR_TOKEN = os.environ.get("FOR_TOKEN", "") # ⚠️ Required
+    FOR2_TOKEN = os.environ.get("FOR2_TOKEN", "") # ⚠️ Required
+    
+    
     DB_URL = os.environ.get("DB_URL", "")
     DB_NAME = os.environ.get("DB_NAME", "")
     # other configs
