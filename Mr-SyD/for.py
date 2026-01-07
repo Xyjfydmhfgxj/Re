@@ -198,7 +198,7 @@ async def save_history(client, message):
     chat_id = message.chat.id
     end_id = message.id  # command message ID
 
-    await message.reply(f"📥 Saving messages **1 → {end_id}**")
+    await message.reply(f"📥 Saving messages **{mrsyd} → {end_id}**")
 
     async for msg in client.iter_messages(chat_id, min_id=mrsyd, max_id=end_id):
         if not msg.media:
