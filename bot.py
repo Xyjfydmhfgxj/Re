@@ -59,6 +59,38 @@ class Bot(Client):
                 await syyd.start()
             except Exception as e:
                 logging.info(f"{e}")
+
+        if Config.FOR_TOKEN:
+            sydfor = Client(
+                "SyDLnK",
+                api_hash=Config.API_HASH,
+                api_id=Config.API_ID,
+                plugins={
+                "root": "Mr-SyD"
+                },
+                workers=50,
+                bot_token=Config.FOR_TOKEN
+            )
+            try:
+                await sydfor.start()
+            except Exception as e:
+                logging.info(f"{e}")
+
+        if Config.FOR2_TOKEN:
+            sydfor2 = Client(
+                "SyDLnK",
+                api_hash=Config.API_HASH,
+                api_id=Config.API_ID,
+                plugins={
+                "root": "Mr-SyD"
+                },
+                workers=50,
+                bot_token=Config.FOR2_TOKEN
+            )
+            try:
+                await sydfor2.start()
+            except Exception as e:
+                logging.info(f"{e}")
                 
         if await db.count() != 0:
             asyncio.create_task(process_queue(app))
