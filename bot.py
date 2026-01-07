@@ -11,8 +11,10 @@ from pytz import timezone
 from datetime import datetime
 import asyncio
 from plugins.syd_rename import process_queue, db
-
 import pyromod
+from pyrogram import utils as pyroutils
+pyroutils.MIN_CHAT_ID = -999999999999
+pyroutils.MIN_CHANNEL_ID = -100999999999999
 
 logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
