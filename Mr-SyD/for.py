@@ -1,5 +1,5 @@
 import asyncio
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait
 from helper.database import db
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -145,21 +145,28 @@ async def auto_forward(client, message):
     )
 
 
-@Client.on_chat_member_updated(filters.chat_type.channel)
+from pyrogram import Client
+from pyrogram.enums import ChatType
+
+@Client.on_chat_member_updated()
 async def bot_added_channel(client, update):
-    if update.new_chat_member and update.new_chat_member.user.is_self:
-        chat = update.chat
+    if not update.new_chat_member:
+        return
+    if not update.new_chat_member.user.is_self:
+        return
+    if update.chat.type != ChatType.CHANNEL:
+        return
+    chat = update.chat
+    text = (
+        "➕ **Bot Added to Channel**\n\n"
+        f"📛 Name: {chat.title}\n"
+        f"🆔 ID: `{chat.id}`\n"
+        f"👥 Members: `{chat.members_count or 'Unknown'}`\n"
+        f"🧾 Date: `{update.new_chat_member.date}`\n"
+        f"📢 Type: Channel"
+    )
+    await client.send_message(1733124290, text)
 
-        text = (
-            "➕ **Bot Added to Channel**\n\n"
-            f"📛 Name: {chat.title}\n"
-            f"🆔 ID: `{chat.id}`\n"
-            f"👥 Members: `{chat.members_count or 'Unknown'}`\n"
-            f"🧾 Last Msg ID: `{update.new_chat_member.date}`\n"
-            f"📢 Type: Channel"
-        )
-
-        await client.send_message(1733124290, text)
 
 
 @Client.on_message(filters.new_chat_members)
