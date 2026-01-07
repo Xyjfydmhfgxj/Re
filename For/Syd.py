@@ -36,7 +36,7 @@ async def forward_messages(client, message):
                         break
                     except FloodWait as e:
                         print(f"FloodWait: Sleeping {e.value} seconds for message {msg_id}")
-                        await asyncio.sleep(e.value)
+                        await asyncio.sleep(e.value + 1)
                     except Exception as e:
                         print(f"Failed to copy message {msg_id}: {e}")
                         break
