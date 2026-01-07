@@ -62,7 +62,7 @@ class Bot(Client):
 
         if Config.FOR_TOKEN:
             sydfor = Client(
-                "SyDLnK",
+                "SyDnK",
                 api_hash=Config.API_HASH,
                 api_id=Config.API_ID,
                 plugins={
@@ -78,7 +78,7 @@ class Bot(Client):
 
         if Config.FOR2_TOKEN:
             sydfor2 = Client(
-                "SyDLnK",
+                "SyDLnKk",
                 api_hash=Config.API_HASH,
                 api_id=Config.API_ID,
                 plugins={
