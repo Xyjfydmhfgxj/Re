@@ -193,12 +193,14 @@ async def bot_added_group(client, message):
 
 @Client.on_message(filters.command("save") & (filters.group | filters.channel))
 async def save_history(client, message):
+    parts = message.text.split(maxsplit=1)
+    mrsyd = parts[1] if len(parts) > 1 else 0
     chat_id = message.chat.id
     end_id = message.id  # command message ID
 
     await message.reply(f"📥 Saving messages **1 → {end_id}**")
 
-    async for msg in client.iter_messages(chat_id, min_id=0, max_id=end_id):
+    async for msg in client.iter_messages(chat_id, min_id=mrsyd, max_id=end_id):
         if not msg.media:
             continue
 
