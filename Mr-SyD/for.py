@@ -124,7 +124,7 @@ async def safe_send(client, **kwargs):
 MIN_SIZE = 70 * 1024 * 1024  # 70 MB
 VERIFIED_USERS = [1733124290]
 
-@Client.on_message(filters.document | filters.video | filters.audio)
+#@Client.on_message(filters.document | filters.video | filters.audio)
 async def auto_forward(client, message):
     if message.from_user and message.from_user.id not in VERIFIED_USERS: return await message.reply("❌ You are not verified. Message @Syd_Xyz 🌿") and await client.send_message(1733124290, f"🚨 Unverified user\n👤 {message.from_user.mention}\n🆔 `{message.from_user.id}`")
     media = getattr(message, message.media.value, None)
