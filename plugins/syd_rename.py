@@ -9,6 +9,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceRepl
 from helper.utils import progress_for_pyrogram, convert, humanbytes
 from helper.database import download_image
 from PIL import Image
+import ffprobe
 import asyncio
 from aiolimiter import AsyncLimiter
 import time
