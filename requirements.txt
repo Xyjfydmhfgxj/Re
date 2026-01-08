@@ -3,7 +3,7 @@ tgcrypto
 motor
 telethon
 dnspython
-ffprobe
+ffmpeg
 hachoir
 pillow
 aiohttp
