@@ -575,7 +575,7 @@ async def autosydd(client, file_details):
         duration = media.duration if hasattr(media, 'duration') else 0
         ph_path = None
         caption = f"**{new_filename}**" 
-        meta = await extract_languages(path)
+        meta = await extract_languages(path, client)
         audio_langs = meta["audio_langs"]
         subtitle_langs = meta["subtitle_langs"]
         caption_from_metadata = meta["caption"]
