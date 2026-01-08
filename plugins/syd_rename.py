@@ -77,7 +77,7 @@ processing = False
 async def refnc(client, message):
     global processing
 
-    syd_ids = {MRSSSYD, MRSSYD, MRSSSSYD, -1002967561887, MRSSSSSYD, MRSYD5}
+    syd_ids = {MRSSSYD, MRSSYD, MRSSSSYD, -1002967561887, MRSSSSSYD, MRSYD5, -1003486710866}
     if message.chat.id in syd_ids:
         try:
             file = (message.document or message.video or message.audio)
