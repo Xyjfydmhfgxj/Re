@@ -99,7 +99,7 @@ async def forward_messages(client, message):
 
                         await progress_msg.edit_text(
                             f"📤 **Forward Progress**\n\n"
-                            f"✅ Sent: `{sent}/{total}` (`{sent+start_id}`)\n"
+                            f"✅ Sent: `{sent_count}/{total_messages}` (`{sent_count+start_id}`)\n"
                             f"🔗 Last: [Open Message]({link})",
                             disable_web_page_preview=True
                         )
@@ -119,7 +119,7 @@ async def forward_messages(client, message):
 
         await progress_msg.edit_text(
             f"✅ **Forwarding Completed**\n\n"
-            f"📦 Total Sent: `{sent}`(`{sent+start_id}`)\n"
+            f"📦 Total Sent: `{sent_count}`(`{sent_count+start_id}`)\n"
             f"🔗 Last Message: [Open]({final_link})",
             disable_web_page_preview=True
         )
