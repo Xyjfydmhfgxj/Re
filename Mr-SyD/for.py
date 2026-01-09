@@ -108,8 +108,9 @@ async def forward_messages(client, message):
                         await progress_msg.edit_text(
                             f"📤 **Forward Progress**\n\n"
                             f"✅ Sent: `{sent_count}/{total_messages}` (`{sent_count+start_id}`)\n"
-                            f"🔗 Last: [Open Message]({link})",
-                            f"🔗 Source: [Open Message]({lnk})"
+                            f"🔗 Last: [Open Message]({link})"
+                            f"🔗 Source: [Open Message]({lnk})",
+                            disable_web_page_preview=True
                         )
                     except Exception as e:
                         print(f"Progress edit failed: {e}")
@@ -124,8 +125,9 @@ async def forward_messages(client, message):
         await progress_msg.edit_text(
             f"✅ **Forwarding Completed**\n\n"
             f"📦 Total Sent: `{sent_count}`(`{sent_count+start_id}`) of {total_messages}\n"
-            f"🔗 Last Message: [Open]({final_link})",
-            f"🔗 Source: [Open Message]({flnk})"
+            f"🔗 Last Message: [Open]({final_link})"
+            f"🔗 Source: [Open Message]({flnk})",
+            disable_web_page_preview=True
         )
 
     except Exception as e:
