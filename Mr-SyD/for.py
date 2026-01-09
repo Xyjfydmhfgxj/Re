@@ -30,7 +30,7 @@ button = InlineKeyboardMarkup([
 @Client.on_message(filters.command("start"))
 async def start(client, message):
     user = message.from_user
-    await db.add_user(client, message)
+   # await db.add_user(client, message)
     await message.reply_text(
         START_TEXT,
         reply_markup=button,
@@ -43,7 +43,14 @@ async def start(client, message):
         username = chat.lstrip("@")
         return f"https://t.me/{username}/{msg_id}"
     return None
-    
+
+def build_msg_link(chat, msg_id):
+    if isinstance(chat, int) and str(chat).startswith("-100"):
+        return f"https://t.me/c/{str(chat)[4:]}/{msg_id}"
+    if isinstance(chat, str):
+        username = chat.lstrip("@")
+        return f"https://t.me/{username}/{msg_id}"
+    return None
 @Client.on_message(filters.command("forward", prefixes="/"))
 async def forward_messages(client, message):
     try:
