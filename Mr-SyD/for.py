@@ -76,6 +76,7 @@ async def forward_messages(client, message):
         pause_seconds = float(parts[5]) if len(parts) > 5 else 1.0
 
         sent_count = 0
+        last_sent_id = None
         total_messages = end_id - start_id + 1
         1_link = build_msg_link(to_chat, last_sent_id)
         lnk1 = build_msg_link(from_chat, end_id)
