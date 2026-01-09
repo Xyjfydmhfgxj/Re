@@ -2,6 +2,14 @@ import asyncio
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 
+def build_msg_link(chat, msg_id):
+    if isinstance(chat, int) and str(chat).startswith("-100"):
+        return f"https://t.me/c/{str(chat)[4:]}/{msg_id}"
+    if isinstance(chat, str):
+        username = chat.lstrip("@")
+        return f"https://t.me/{username}/{msg_id}"
+    return None
+    
 @Client.on_message(filters.command("forward", prefixes="/"))
 async def forward_messages(client, message):
     try:
@@ -43,8 +51,16 @@ async def forward_messages(client, message):
 
                 if sent_count % 100 == 0:
                     try:
+                        if str(to_chat).startswith("-100"):
+                            link = build_msg_link(to_chat, end_id)
+                        else:
+                            link = build_msg_link(to_chat, last_sent_id)
+
                         await progress_msg.edit_text(
-                            f"📤 Forwarded {sent_count}/{total_messages} messages..."
+                            f"📤 **Forward Progress**\n\n"
+                            f"✅ Sent: `{sent}/{total}` (`{sent+start_id}`)\n"
+                            f"🔗 Last: [Open Message]({link})",
+                            disable_web_page_preview=True
                         )
                     except Exception as e:
                         print(f"Progress edit failed: {e}")
@@ -54,7 +70,18 @@ async def forward_messages(client, message):
             except Exception as e:
                 print(f"Error fetching message {msg_id}: {e}")
 
-        await progress_msg.edit_text("✅ Forwarding completed.")
+        final_link = (
+            build_msg_link(to_chat, end_id)
+            if str(to_chat).startswith("-100")
+            else build_msg_link(to_chat, last_sent_id)
+        )
+
+        await progress_msg.edit_text(
+            f"✅ **Forwarding Completed**\n\n"
+            f"📦 Total Sent: `{sent}`(`{sent+start_id}`)\n"
+            f"🔗 Last Message: [Open]({final_link})",
+            disable_web_page_preview=True
+        )
 
     except Exception as e:
         await message.reply(f"❌ Error: {e}")
@@ -67,7 +94,7 @@ SOURCE_CHANNEL = -1003583073724   # channel to listen
 TARGET_CHANNEL = -1003342276289   # channel to copy into
 
 
-@Client.on_message(filters.chat(SOURCE_CHANNEL))
+#@Client.on_message(filters.chat(SOURCE_CHANNEL))
 async def copy_incoming_message(client: Client, message):
     while True:
         try:
