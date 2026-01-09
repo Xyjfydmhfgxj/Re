@@ -3,6 +3,9 @@ from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait
 from helper.database import db
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram import utils as pyroutils
+pyroutils.MIN_CHAT_ID = -999999999999
+pyroutils.MIN_CHANNEL_ID = -100999999999999
 
 START_TEXT = (
     "**ꜱᴇɴᴅ ᴍᴇ ꜰɪʟᴇꜱ** ᴏʀ **ᴀᴅᴅ ᴍᴇ ᴛᴏ ᴀ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ** ᴡʜᴇʀᴇ ꜰɪʟᴇꜱ ᴀʀᴇ ᴘʀᴇꜱᴇɴᴛ — "
@@ -34,6 +37,13 @@ async def start(client, message):
         disable_web_page_preview=True
     )
         
+    if isinstance(chat, int) and str(chat).startswith("-100"):
+        return f"https://t.me/c/{str(chat)[4:]}/{msg_id}"
+    if isinstance(chat, str):
+        username = chat.lstrip("@")
+        return f"https://t.me/{username}/{msg_id}"
+    return None
+    
 @Client.on_message(filters.command("forward", prefixes="/"))
 async def forward_messages(client, message):
     try:
@@ -68,24 +78,44 @@ async def forward_messages(client, message):
                         break
                     except FloodWait as e:
                         print(f"FloodWait: Sleeping {e.value} seconds for message {msg_id}")
-                        await asyncio.sleep(e.value)
+                        await asyncio.sleep(e.value + 1)
                     except Exception as e:
                         print(f"Failed to copy message {msg_id}: {e}")
                         break
 
                 if sent_count % 100 == 0:
                     try:
+                        if str(to_chat).startswith("-100"):
+                            link = build_msg_link(to_chat, end_id)
+                        else:
+                            link = build_msg_link(to_chat, last_sent_id)
+
                         await progress_msg.edit_text(
-                            f"📤 Forwarded {sent_count}/{total_messages} (`{sent_count + start_id}`) messages..."
+                            f"📤 **Forward Progress**\n\n"
+                            f"✅ Sent: `{sent}/{total}` (`{sent+start_id}`)\n"
+                            f"🔗 Last: [Open Message]({link})",
+                            disable_web_page_preview=True
                         )
                     except Exception as e:
                         print(f"Progress edit failed: {e}")
+
                 await asyncio.sleep(pause_seconds)
 
             except Exception as e:
                 print(f"Error fetching message {msg_id}: {e}")
 
-        await progress_msg.edit_text("✅ Forwarding completed.")
+        final_link = (
+            build_msg_link(to_chat, end_id)
+            if str(to_chat).startswith("-100")
+            else build_msg_link(to_chat, last_sent_id)
+        )
+
+        await progress_msg.edit_text(
+            f"✅ **Forwarding Completed**\n\n"
+            f"📦 Total Sent: `{sent}`(`{sent+start_id}`)\n"
+            f"🔗 Last Message: [Open]({final_link})",
+            disable_web_page_preview=True
+        )
 
     except Exception as e:
         await message.reply(f"❌ Error: {e}")
