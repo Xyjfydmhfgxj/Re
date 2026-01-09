@@ -509,10 +509,10 @@ async def autosydd(client, file_details):
                        "-CPTN5DW", "DEVENU", "-ViSTA", "-SH3LBY", "[]", "-.", "+ -", "- +", "- -", "[", "]", "--", "_"]
         sydd = ['psa', 'sh3lby', 'Archie', 'Jo', 'Spidey', 'mkvcinemas', 'Telly', 'SH3LBY.mkv', 'bigil', 'YTS.MX', 'WADU', 'budgetbits', 'HDA', 'TR', 'primefix', 'GalaxyRG265', 'bone', 'Incursi0', 'StreliziA', 'ikaRos', 'lssjbroly', 'soan', 'pahe', 'poke', 'galaxytv', 'galaxyrg', 'NazzY', 'VARYG', 'MICHAEL', 'FLUX', 'RAV1NE', '[YTS']
         for w in mrsyds + remove_list + sydd:
-            sydyy = sydyy.replace(w, " ")
+            sydy = sydy.replace(w, " ")
             
-        sydyy = sydyy.replace("_", " ")
-        sydyy = sydyy.replace(".", " ")
+      #  sydyy = sydyy.replace("_", " ")
+     #   sydyy = sydyy.replace(".", " ")
         sydy = sydy.replace("_", " ")
         sydy = sydy.replace(".", " ")
         sydy = sydy.replace(" - ", " ")
