@@ -89,8 +89,9 @@ async def forward_messages(client, message):
 
                 while True:
                     try:
-                        await msg.copy(to_chat)
+                        copied = await msg.copy(to_chat)
                         sent_count += 1
+                        last_sent_id = copied.id
                         break
                     except FloodWait as e:
                         print(f"FloodWait: Sleeping {e.value} seconds for message {msg_id}")
