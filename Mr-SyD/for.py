@@ -77,8 +77,10 @@ async def forward_messages(client, message):
 
         sent_count = 0
         total_messages = end_id - start_id + 1
-        progress_msg = await message.reply("Forwarding started...")
-
+        1_link = build_msg_link(to_chat, last_sent_id)
+        lnk1 = build_msg_link(from_chat, end_id)
+        progress_msg = await message.reply("Forwarding started...\n🔗 Dump: [Open Message]({1_link}) \n🔗 Source: [Open Message]({lnk1})")
+        await asyncio.sleep(14)
         for msg_id in range(start_id, end_id + 1):
             try:
                 msg = await client.get_messages(from_chat, msg_id)
@@ -117,7 +119,7 @@ async def forward_messages(client, message):
                 print(f"Error fetching message {msg_id}: {e}")
 
         final_link = build_msg_link(to_chat, last_sent_id)
-        lnk = build_msg_link(from_chat, end_id)
+        flnk = build_msg_link(from_chat, end_id)
         await progress_msg.edit_text(
             f"✅ **Forwarding Completed**\n\n"
             f"📦 Total Sent: `{sent_count}`(`{sent_count+start_id}`) of {total_messages}\n"
