@@ -99,15 +99,13 @@ async def forward_messages(client, message):
 
                 if sent_count % 100 == 0:
                     try:
-                        if str(to_chat).startswith("-100"):
-                            link = build_msg_link(to_chat, end_id)
-                        else:
-                            link = build_msg_link(to_chat, last_sent_id)
-
+                        link = build_msg_link(to_chat, last_sent_id)
+                        lnk = build_msg_link(from_chat, start_id)
                         await progress_msg.edit_text(
                             f"📤 **Forward Progress**\n\n"
                             f"✅ Sent: `{sent_count}/{total_messages}` (`{sent_count+start_id}`)\n"
                             f"🔗 Last: [Open Message]({link})",
+                            f"🔗 Source: [Open Message]({lnk})",
                             disable_web_page_preview=True
                         )
                     except Exception as e:
@@ -118,16 +116,13 @@ async def forward_messages(client, message):
             except Exception as e:
                 print(f"Error fetching message {msg_id}: {e}")
 
-        final_link = (
-            build_msg_link(to_chat, end_id)
-            if str(to_chat).startswith("-100")
-            else build_msg_link(to_chat, last_sent_id)
-        )
-
+        final_link = build_msg_link(to_chat, last_sent_id)
+        lnk = build_msg_link(from_chat, end_id)
         await progress_msg.edit_text(
             f"✅ **Forwarding Completed**\n\n"
             f"📦 Total Sent: `{sent_count}`(`{sent_count+start_id}`) of {total_messages}\n"
             f"🔗 Last Message: [Open]({final_link})",
+            f"🔗 Source: [Open Message]({flnk})",
             disable_web_page_preview=True
         )
 
