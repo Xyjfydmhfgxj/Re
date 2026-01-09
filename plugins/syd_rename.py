@@ -517,6 +517,7 @@ async def autosydd(client, file_details):
         sydy = sydy.replace(".", " ")
         sydy = sydy.replace(" - ", " ")
         sydy = sydy.replace("- ", " ")
+        sydy = sydy.replace("-", " ")
             
         #syd = rearrange_string(sydy, sydyy)
         syd = sydy
@@ -584,13 +585,13 @@ async def autosydd(client, file_details):
  
         duration = media.duration if hasattr(media, 'duration') else 0
         ph_path = None
-        caption = f"**{new_filename}**" 
+        caption = f"**{new_filename}**\n\n" 
         meta = await extract_languages(path, client)
         audio_langs = meta["audio_langs"]
         subtitle_langs = meta["subtitle_langs"]
         caption_from_metadata = meta["caption"]
         if audio_langs:
-            caption += f"**\n\n🔊 Audio: {', '.join(audio_langs)}**\n"
+            caption += f"**🔊 Audio: {', '.join(audio_langs)}**\n"
         if subtitle_langs:
             caption += f"**📜 Subtitles: {', '.join(subtitle_langs)}**\n"
        # if caption_from_metadata:
