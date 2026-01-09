@@ -45,12 +45,19 @@ async def start(client, message):
     return None
 
 def build_msg_link(chat, msg_id):
+    # Convert numeric string to int
+    if isinstance(chat, str) and chat.lstrip("-").isdigit():
+        chat = int(chat)
+
     if isinstance(chat, int) and str(chat).startswith("-100"):
         return f"https://t.me/c/{str(chat)[4:]}/{msg_id}"
+
     if isinstance(chat, str):
         username = chat.lstrip("@")
         return f"https://t.me/{username}/{msg_id}"
+
     return None
+
 @Client.on_message(filters.command("forward", prefixes="/"))
 async def forward_messages(client, message):
     try:
