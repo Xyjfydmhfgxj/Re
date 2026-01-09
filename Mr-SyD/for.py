@@ -80,7 +80,7 @@ async def forward_messages(client, message):
         total_messages = end_id - start_id + 1
         ilink = build_msg_link(to_chat, start_id)
         lnk1 = build_msg_link(from_chat, end_id)
-        progress_msg = await message.reply("Forwarding started...\n\n🔗 Dump: [Open Message]({ilink}) \n🔗 Source: [Open Message]({lnk1})")
+        progress_msg = await message.reply(f"Forwarding started...\n\n🔗 Dump: [Open Message]({ilink}) \n🔗 Source: [Open Message]({lnk1})")
         await asyncio.sleep(14)
         for msg_id in range(start_id, end_id + 1):
             try:
