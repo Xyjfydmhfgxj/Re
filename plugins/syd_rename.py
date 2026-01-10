@@ -94,7 +94,6 @@ async def refnc(client, message):
                 await message.delete()
                 return
             file_data = {
-                "file_id": file.file_id,
                 "file_name": file.file_name,
                 "caption": message.caption,
                 "file_size": file.file_size,
