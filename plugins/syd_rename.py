@@ -72,6 +72,7 @@ class Database:
 
 db = Database(Config.DB_URL, Config.DB_NAME)
 processing = False
+SYD = [1, 2, 4, 5, 5, 8, 10, 10, 15, 30, 60]
 
 @Client.on_message((filters.document | filters.audio | filters.video) & filters.channel)
 async def refnc(client, message):
@@ -84,6 +85,7 @@ async def refnc(client, message):
             if not file:
                 return
             if file.file_size > 2000 * 1024 * 1024:
+                await asyncio.sleeep(random.choice(SYD))
                 await client.copy_message(sydtg, message.chat.id, message.id)
                 await message.delete()
                 return
@@ -99,9 +101,11 @@ async def refnc(client, message):
                 "message_id": message.id,
                 "chat_id": message.chat.id,
             }
+            await asyncio.sleep(random.choice(SYD))
             await db.add_to_queue(file_data)
             if not processing:
-                await asyncio.create_task(process_queue(client))
+                processing = True
+                asyncio.create_task(process_queue(client))
         except Exception as e:
             await message.reply_text(f"❌ Error: {e}")
 
