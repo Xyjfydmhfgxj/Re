@@ -85,7 +85,7 @@ async def refnc(client, message):
             if not file:
                 return
             if file.file_size > 2000 * 1024 * 1024:
-                await asyncio.sleeep(random.choice(SYD))
+                await asyncio.sleep(random.choice(SYD))
                 await client.copy_message(sydtg, message.chat.id, message.id)
                 await message.delete()
                 return
