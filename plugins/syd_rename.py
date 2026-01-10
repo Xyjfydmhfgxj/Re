@@ -101,13 +101,13 @@ async def refnc(client, message):
             }
             await db.add_to_queue(file_data)
             if not processing:
-                processing = True
-                await process_queue(client)
+                await asyncio.create_task(process_queue(client))
         except Exception as e:
             await message.reply_text(f"❌ Error: {e}")
 
 async def process_queue(client):
     global processing
+    processing = True
     try:
         while True:
             file_details = await db.pop_from_queue()
