@@ -95,7 +95,7 @@ class Bot(Client):
                 logging.info(f"{e}")
                 
         if await db.count() != 0:
-            asyncio.create_task(process_queue(app))
+            asyncio.create_task(process_queue(self))
 
         for id in Config.ADMIN:
             try:
