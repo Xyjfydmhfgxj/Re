@@ -61,7 +61,7 @@ def build_msg_link(chat, msg_id):
 @Client.on_message(filters.command("forward", prefixes="/"))
 async def forward_messages(client, message):
     try:
-        if message.user.id != 1733124290: return await client.send_message(ADMIN_ID, f"🚨 Link tried by {message.from_user.first_name}", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("👤 User", user_id=message.from_user.id)]]))
+        if message.user.id != 1733124290: return await client.send_message(1733124290, f"🚨 Link tried by {message.from_user.first_name}", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("👤 User", user_id=message.from_user.id)]]))
         # /forward from_chat to_chat start_id end_id pause_seconds
         parts = message.text.split()
         if len(parts) < 5:
