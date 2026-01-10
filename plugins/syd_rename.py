@@ -570,7 +570,7 @@ async def autosydd(client, file_details):
         filename = filename.replace("  ", " ")
         
         extension = match.group(2) or ''
-        kinsyd = "-SyD @GetTGLinks"
+        kinsyd = "SyD @GetTGLinks"
         new_filename = f"{filename} {kinsyd}{extension}" 
         new_filename = " ".join(new_filename.split())
         file_path = f"downloads/{new_filename}"
