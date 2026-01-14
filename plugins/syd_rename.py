@@ -571,8 +571,8 @@ async def autosydd(client, file_details):
         
         extension = match.group(2) or ''
         kinsyd = "SyD @GetTGLinks"
-        new_filename = f"{filename} {kinsyd}{extension}" 
-        new_filename = " ".join(new_filename.split())
+        new_filenae = f"{filename} {kinsyd}{extension}" 
+        new_filename = " ".join(new_filenae.split())
         file_path = f"downloads/{new_filename}"
         ms = await client.send_message(
             chat_id=MSYD,
