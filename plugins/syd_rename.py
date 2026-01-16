@@ -678,3 +678,52 @@ async def autosydd(client, file_details):
         logger.error(f"An error occurred: {e}")
         await client.send_message(1733124290, f"An error {e}")
 
+
+
+@Client.on_message(filters.command("add") & filters.channel)
+async def add_range(client, message):
+    syd_ids = {
+        MRSSSYD, MRSSYD, MRSSSSYD,
+        -1002967561887, MRSSSSSYD,
+        MRSYD5, -1003486710866
+    }
+
+    if message.chat.id not in syd_ids:
+        return
+
+    args = message.text.split(maxsplit=1)
+    if len(args) != 2 or not args[1].isdigit():
+        return await message.reply_text("❌ Usage: `/add 100`")
+
+    limit = int(args[1])
+    start_id = message.id - 1
+    end_id = max(1, start_id - limit + 1)
+
+    added = 0
+
+    for mid in range(start_id, end_id - 1, -1):
+        try:
+            msg = await client.get_messages(message.chat.id, mid)
+            if not msg:
+                continue
+
+            file = msg.document or msg.video or msg.audio
+            if not file:
+                continue
+
+            file_data = {
+                "file_name": file.file_name,
+                "caption": msg.caption,
+                "file_size": file.file_size,
+                "message_id": msg.id,
+                "chat_id": msg.chat.id,
+            }
+
+            await db.add_to_queue(file_data)
+            added += 1
+
+        except Exception:
+            continue
+
+    await message.reply_text(f"✅ Added **{added} files** to DB")
+    
