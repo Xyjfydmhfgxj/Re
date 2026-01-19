@@ -7,6 +7,23 @@ from pyrogram import utils as pyroutils
 pyroutils.MIN_CHAT_ID = -999999999999
 pyroutils.MIN_CHANNEL_ID = -100999999999999
 
+from pyrogram.errors import PeerIdInvalid, RPCError
+
+async def ensure_peer(client, chat_id: int) -> bool:
+    try:
+        await client.get_chat(chat_id)
+        return True
+
+    except PeerIdInvalid:
+        return False
+
+    except RPCError:
+        try:
+            await client.resolve_peer(chat_id)
+            return True
+        except Exception:
+            return False
+            
 START_TEXT = (
     "**ꜱᴇɴᴅ ᴍᴇ ꜰɪʟᴇꜱ** ᴏʀ **ᴀᴅᴅ ᴍᴇ ᴛᴏ ᴀ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ** ᴡʜᴇʀᴇ ꜰɪʟᴇꜱ ᴀʀᴇ ᴘʀᴇꜱᴇɴᴛ — "
     "ɪ’ʟʟ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴀᴅᴅ ɴᴇᴡ ꜰɪʟᴇꜱ ʀᴇᴄɪᴇᴠᴇᴅ ɪɴ ᴛʜᴏꜱᴇ ᴄʜᴀᴛ ɪɴᴛᴏ **[ᴏᴜʀ ʙᴏᴛꜱ](https://t.me/Bot_Cracker/17)**.\n\n"
@@ -82,7 +99,12 @@ async def forward_messages(client, message):
         ilink = build_msg_link(to_chat, start_id)
         lnk1 = build_msg_link(from_chat, end_id)
         progress_msg = await message.reply(f"Forwarding started...\n\n🔗 Dump: [Open Message]({ilink}) \n🔗 Source: [Open Message]({lnk1})")
-        await asyncio.sleep(14)
+        await asyncio.sleep(7)
+        failed = []
+        if not await ensure_peer(client, to_chat): failed.append(ilink)
+        if not await ensure_peer(client, from_chat): failed.append(lnk1)
+        if failed: return await message.reply_text("❌ **Peer ID not met**\n\n" + "\n".join(f"• {i}" for i in failed),disable_web_page_preview=True)
+        await asyncio.sleep(1)
         for msg_id in range(start_id, end_id + 1):
             try:
                 msg = await client.get_messages(from_chat, msg_id)
