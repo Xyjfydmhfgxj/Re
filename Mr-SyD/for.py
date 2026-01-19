@@ -9,7 +9,7 @@ pyroutils.MIN_CHANNEL_ID = -100999999999999
 
 from pyrogram.errors import PeerIdInvalid, RPCError
 
-async def ensure_peer(client, chat_id: int) -> bool:
+async def ensure_peer(client, chat_id: int): # -> bool:
     try:
         await client.get_chat(chat_id)
         return True
