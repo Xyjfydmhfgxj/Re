@@ -682,6 +682,7 @@ async def autosydd(client, file_details):
 
 @Client.on_message(filters.command("add") & filters.channel)
 async def add_range(client, message):
+    global processing
     syd_ids = {
         MRSSSYD, MRSSYD, MRSSSSYD,
         -1002967561887, MRSSSSSYD,
@@ -700,7 +701,7 @@ async def add_range(client, message):
     end_id = max(1, start_id - limit + 1)
 
     added = 0
-
+    syd=await message.reply_text("Processing")
     for mid in range(start_id, end_id - 1, -1):
         try:
             msg = await client.get_messages(message.chat.id, mid)
@@ -725,5 +726,9 @@ async def add_range(client, message):
         except Exception:
             continue
 
-    await message.reply_text(f"✅ Added **{added} files** to DB")
+    await syd.edit(f"✅ Added **{added} files** to DB")
+    if not processing:
+        processing = True
+        asyncio.create_task(process_queue(client))
+        
     
