@@ -103,7 +103,7 @@ async def forward_messages(client, message):
         failed = []
         if not await ensure_peer(client, to_chat): failed.append(ilink)
         if not await ensure_peer(client, from_chat): failed.append(lnk1)
-        if failed: return await message.reply_text("❌ **Peer ID not met**\n\n" + "\n".join(f"• {i}" for i in failed),disable_web_page_preview=True)
+        if failed: return await progress_msg.edit("❌ **Peer ID not met**\n\n" + "\n".join(f"• {i}" for i in failed),disable_web_page_preview=True)
         await asyncio.sleep(1)
         for msg_id in range(start_id, end_id + 1):
             try:
