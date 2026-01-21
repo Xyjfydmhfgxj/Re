@@ -682,7 +682,6 @@ async def autosydd(client, file_details):
 
 @Client.on_message(filters.command("add") & filters.channel)
 async def add_range(client, message):
-    global processing
     syd_ids = {
         MRSSSYD, MRSSYD, MRSSSSYD,
         -1002967561887, MRSSSSSYD,
@@ -697,14 +696,15 @@ async def add_range(client, message):
         return await message.reply_text("❌ Usage: `/add 100`")
 
     limit = int(args[1])
-    start_id = message.id - 1
-    end_id = max(1, start_id - limit + 1)
-
     added = 0
-    syd=await message.reply_text("Processing")
-    for mid in range(start_id, end_id - 1, -1):
+    mid = message.id - 1
+
+    status = await message.reply_text("⏳ Processing...")
+
+    while added < limit and mid > 0:
         try:
             msg = await client.get_messages(message.chat.id, mid)
+            mid -= 1
             if not msg:
                 continue
 
@@ -712,6 +712,12 @@ async def add_range(client, message):
             if not file:
                 continue
 
+            if file.file_size > 2000 * 1024 * 1024:
+                await asyncio.sleep(random.choice(SYD))
+                await client.copy_message(sydtg, message.chat.id, mid)
+                await msg.delete()
+                return
+                
             file_data = {
                 "file_name": file.file_name,
                 "caption": msg.caption,
@@ -726,7 +732,7 @@ async def add_range(client, message):
         except Exception:
             continue
 
-    await syd.edit(f"✅ Added **{added} files** to DB")
+    await status.edit(f"✅ Added **{added} files** to DB")
     if not processing:
         processing = True
         asyncio.create_task(process_queue(client))
