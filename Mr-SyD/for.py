@@ -132,7 +132,8 @@ async def forward_messages(client, message):
                             f"📤 **Forward Progress**\n\n"
                             f"✅ Sent: `{sent_count}/{total_messages}` (`{sent_count+start_id}`)\n"
                             f"🔗 Last: [Open Message]({link})\n"
-                            f"🔗 Source: [Open Message]({lnk})",
+                            f"🔗 Source: [Open Message]({lnk})\n",
+                            f"\n• `/forward {from_chat} {to_chat} {sent_count+start_id} {end_id} {pause_seconds}`",
                             disable_web_page_preview=True
                         )
                     except Exception as e:
