@@ -8,7 +8,8 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMedi
 from config import Config, Txt
 import humanize
 from time import sleep
-
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram import raw
 logger = logging.getLogger(__name__)
 
 @Client.on_message(filters.private & filters.command("start"))
@@ -17,7 +18,6 @@ async def start(client, message):
     if message.from_user.id in Config.BANNED_USERS:
         await message.reply_text("Sorry, You are banned.")
         return
-
     user = message.from_user
     button = InlineKeyboardMarkup([[
         InlineKeyboardButton(
@@ -34,6 +34,45 @@ async def start(client, message):
     else:
         await message.reply_text(text=Txt.START_TXT.format(user.mention), reply_markup=button, disable_web_page_preview=True)
 
+    sm = await message.reply_text(
+        "test",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        text="a",
+                        url="https://www.iamidiotareyoutoo.com",
+                        style=raw.types.KeyboardButtonStyle(
+                            bg_primary=True,
+                            icon=5330153855713815392
+                        )
+                    ),
+                    InlineKeyboardButton(
+                        text="B",
+                        callback_data="B",
+                        style=raw.types.KeyboardButtonStyle(
+                            bg_danger=True,
+                            icon=5879896690210639947
+                        )
+                    ),
+                ],
+                [
+                    InlineKeyboardButton(
+                        text="a",
+                        user_id=7351948
+                    ),
+                    InlineKeyboardButton(
+                        text="D",
+                        switch_inline_query_current_chat="D",
+                        style=raw.types.KeyboardButtonStyle(
+                            bg_success=True,
+                            icon=5327897894076823444
+                        )
+                    ),
+                ],
+            ]
+        )
+    )
 @Client.on_message(filters.command("start") & filters.chat(-1002687879857))
 async def sydstart(client, message):
     await message.reply_text(".")
