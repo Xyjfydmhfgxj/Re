@@ -10,6 +10,7 @@ aiohttp
 pytz
 humanize
 pyromod
+PyroTGFork
 ffmpeg-python
 psutil
 aiolimiter
