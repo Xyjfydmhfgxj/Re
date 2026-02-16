@@ -1,6 +1,8 @@
 
 
-from aiohttp import web import motor.motor_asyncio import os
+from aiohttp import web 
+import motor.motor_asyncio 
+import os
 
 MONGO_URI = "mongodb+srv://Clone0:Clone0@cluster0.9lyifoh.mongodb.net/" 
 DB_NAME = "referral_db"
