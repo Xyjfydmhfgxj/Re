@@ -1,24 +1,11 @@
-=============================
 
-Referral Sharing Web App
-
-Backend: aiohttp
-
-Database: MongoDB (Motor async driver)
-
-Frontend: Animated HTML + CSS + JS
-
-=============================
 
 from aiohttp import web import motor.motor_asyncio import os
 
-MONGO_URI = "mongodb://localhost:27017" DB_NAME = "referral_db"
+MONGO_URI = "mongodb+srv://Clone0:Clone0@cluster0.9lyifoh.mongodb.net/" 
+DB_NAME = "referral_db"
 
-=============================
 
-MongoDB Class
-
-=============================
 
 class ReferralDB: def init(self, uri=MONGO_URI, db_name=DB_NAME): self.client = motor.motor_asyncio.AsyncIOMotorClient(uri) self.db = self.client[db_name] self.collection = self.db["referrals"]
 
@@ -46,11 +33,11 @@ async def delete_referral(self, referral_id):
 
 routes = web.RouteTableDef() db = ReferralDB()
 
-=============================
+#=============================
 
-API Routes
+#API Routes
 
-=============================
+#=============================
 
 @routes.get("/api/search") async def search_handler(request): query = request.query.get("q") tag = request.query.get("tag") results = await db.search_referrals(query, tag) for r in results: r["_id"] = str(r["_id"]) return web.json_response(results)
 
@@ -58,19 +45,19 @@ API Routes
 
 @routes.delete("/api/delete/{id}") async def delete_handler(request): await db.delete_referral(request.match_info["id"]) return web.json_response({"status": "deleted"})
 
-=============================
+#=============================
 
-Frontend UI
+#Frontend UI
 
-=============================
+#=============================
 
 @routes.get("/") async def index(request): return web.Response(text=HTML_PAGE, content_type="text/html")
 
-=============================
+#=============================
 
-Animated HTML Interface
+#Animated HTML Interface
 
-=============================
+#=============================
 
 HTML_PAGE = """
 
@@ -168,10 +155,10 @@ async function addReferral() {
 search();
 </script></body>
 </html>
-"""=============================
+"""#=============================
 
-App Init
+#App Init
 
-=============================
+#=============================
 
 async def web_server(): app = web.Application(client_max_size=30000000) app.add_routes(routes) return app
