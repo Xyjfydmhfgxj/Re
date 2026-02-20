@@ -39,11 +39,10 @@ class Config(object):
 class Txt(object):
     # part of text configuration
     START_TXT = """<b>Hᴀɪ {} 👋,
-I Δᴍ Aɴ Aᴅᴠᴀɴᴄᴇᴅ Aɴᴅ Yᴇᴛ Pᴏᴡᴇʀꜰᴜʟ Rᴇɴᴀᴍᴇ Bᴏᴛ Yᴏᴜ Hᴀᴅ єᴠєʀ Sᴇᴇɴ ᴩʀᴏʙᴀʙʟʏ.... 🪄
-Yᴏᴜ Cᴀɴ Rᴇɴᴀᴍᴇ & Cʜᴀɴɢᴇ Tʜᴜᴍʙɴᴀɪʟ Oꜰ Δɴʏ Fɪʟᴇ Fᴏʀ <u>FR̊ΞΞ</u>🩵
-
-<blockquote>Bᴏᴛ Δʟꜱᴏ Sᴜᴩᴩᴏʀᴛ 2ɢʙ+ ꜰɪʟᴇꜱ Δ Wɪᴛʜ ΔҒҒᴏʀᴅᴀʙʟᴇ Pʀɪᴄᴇ 🚨
-</b></blockquote>"""
+I Δᴍ Aɴ Aᴅᴠᴀɴᴄᴇᴅ Aɴᴅ Yᴇᴛ Pᴏᴡᴇʀꜰᴜʟ Rᴇɴᴀᴍᴇ Bᴏᴛ.
+ 
+Bot Is Set For Private Use Only, Only Follows Legal Methods In telegram.
+To Do A Complaint, Message Us."""
     
     STRT_TXT = """<b>Hᴀɪ {} 👋,
 ɪ ᴀᴍ ᴀ ᴠɪᴅᴇᴏ ᴛᴏ ꜱᴛɪᴄᴋᴇʀ ʙᴏᴛ ᴡʜɪᴄʜ ᴄᴀɴ ᴄᴏɴᴠᴇʀᴛ ᴠɪᴅᴇᴏꜱ, ɪᴍᴀɢᴇꜱ ᴀɴᴅ ɢɪꜰꜱ ɪɴᴛᴏ ꜱᴛɪᴄᴋᴇʀꜱ 
