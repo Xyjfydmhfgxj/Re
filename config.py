@@ -42,7 +42,9 @@ class Txt(object):
 I Δᴍ Aɴ Aᴅᴠᴀɴᴄᴇᴅ Aɴᴅ Yᴇᴛ Pᴏᴡᴇʀꜰᴜʟ Rᴇɴᴀᴍᴇ Bᴏᴛ.
  
 Bot Is Set For Private Use Only, Only Follows Legal Methods In telegram.
-To Do A Complaint, Message Us."""
+To Do A Complaint, Message Us.
+This Bot Only Messages Channel, Where It Has Right (Owned By Me).
+Bot Doesn't Works On Group."""
     
     STRT_TXT = """<b>Hᴀɪ {} 👋,
 ɪ ᴀᴍ ᴀ ᴠɪᴅᴇᴏ ᴛᴏ ꜱᴛɪᴄᴋᴇʀ ʙᴏᴛ ᴡʜɪᴄʜ ᴄᴀɴ ᴄᴏɴᴠᴇʀᴛ ᴠɪᴅᴇᴏꜱ, ɪᴍᴀɢᴇꜱ ᴀɴᴅ ɢɪꜰꜱ ɪɴᴛᴏ ꜱᴛɪᴄᴋᴇʀꜱ 
