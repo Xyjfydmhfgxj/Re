@@ -43,8 +43,8 @@ I Δᴍ Aɴ Aᴅᴠᴀɴᴄᴇᴅ Aɴᴅ Yᴇᴛ Pᴏᴡᴇʀꜰᴜʟ Rᴇɴᴀ�
  
 Bot Is Set For Private Use Only, Only Follows Legal Methods In telegram.
 To Do A Complaint, Message Us.
-This Bot Only Messages Channel, Where It Has Right (Owned By Me).
-Bot Doesn't Works On Group."""
+This Bot Only Messages Channel, Where It Has Right (Owned By Me, for private use only).
+Bot Doesn't Works On Any Group Neither Sends message to anyone ✅."""
     
     STRT_TXT = """<b>Hᴀɪ {} 👋,
 ɪ ᴀᴍ ᴀ ᴠɪᴅᴇᴏ ᴛᴏ ꜱᴛɪᴄᴋᴇʀ ʙᴏᴛ ᴡʜɪᴄʜ ᴄᴀɴ ᴄᴏɴᴠᴇʀᴛ ᴠɪᴅᴇᴏꜱ, ɪᴍᴀɢᴇꜱ ᴀɴᴅ ɢɪꜰꜱ ɪɴᴛᴏ ꜱᴛɪᴄᴋᴇʀꜱ 
