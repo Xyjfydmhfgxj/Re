@@ -12,5 +12,7 @@ humanize
 #pyromod
 PyroTGFork
 ffmpeg-python
+imageio-ffmpeg
+moviepy
 psutil
 aiolimiter
