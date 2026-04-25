@@ -13,6 +13,7 @@ pyromod
 PyroTGFork
 ffmpeg-python
 imageio-ffmpeg
+ffmpegio
 moviepy
 psutil
 aiolimiter
