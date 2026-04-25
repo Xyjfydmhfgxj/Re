@@ -9,7 +9,7 @@ pillow
 aiohttp
 pytz
 humanize
-#pyromod
+pyromod
 PyroTGFork
 ffmpeg-python
 imageio-ffmpeg
