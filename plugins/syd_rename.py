@@ -20,6 +20,7 @@ import time
 import json
 from helper.utils import add_prefix_suffix, client, start_clone_bot #, is_req_subscribed
 from config import Config
+import imageio_ffmpeg
 #from .mrsyds import mrsydtg
 #from info import AUTH_CHANNEL
 logger = logging.getLogger(__name__)
