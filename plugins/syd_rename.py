@@ -142,8 +142,11 @@ async def extract_languages(path: str, client):
     """
 
     try:
+        ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
+        ffprobe_path = ffmpeg_path.replace("ffmpeg", "ffprobe")
         cmd = [
-            "ffprobe",
+            ffprobe_path,
+           # "ffprobe",
             "-v", "quiet",
             "-print_format", "json",
             "-show_streams",
