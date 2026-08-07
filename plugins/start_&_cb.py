@@ -192,6 +192,7 @@ async def live_forward(client, message):
 
                 print(f"Forwarded: {message.id}")
                 await asyncio.sleep(5)
+                await message.delete()
                 return
 
             except FloodWait as e:
