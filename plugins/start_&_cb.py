@@ -12,7 +12,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import raw
 logger = logging.getLogger(__name__)
 
-@Client.on_message(filters.private & filters.command("start"))
+#@Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
 
     if message.from_user.id in Config.BANNED_USERS:
@@ -73,7 +73,7 @@ async def start(client, message):
             ]
         )
     )
-@Client.on_message(filters.command("start") & filters.chat(-1002687879857))
+#@Client.on_message(filters.command("start") & filters.chat(-1002687879857))
 async def sydstart(client, message):
     await message.reply_text(".")
 
@@ -84,7 +84,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 
-@Client.on_message(filters.command("addbutton") & filters.private)
+#@Client.on_message(filters.command("addbutton") & filters.private)
 async def addbutton(client, message):
     try:
         await message.reply("📌 Forward the message OR send its ID/link (public/private channel).")
@@ -162,3 +162,42 @@ async def addbutton(client, message):
 
     except Exception as e:
         await message.reply(f"🚨 Unexpected error: `{e}`")
+
+
+
+
+import asyncio
+from pyrogram import Client, filters
+from pyrogram.errors import FloodWait
+
+
+SOURCE_CHAT = [-1003769564318, -1003778649901, -1004489264718, -1004235033201, -1004485913563]
+DUMP_CHAT = -1002287749434
+
+sem = asyncio.Semaphore(2)
+
+
+@Client.on_message(filters.chat(SOURCE_CHAT) & (filters.video | filters.document))
+async def live_forward(client, message):
+    async with sem:
+        while True:
+            try:
+                await client.copy_message(
+                    chat_id=DUMP_CHAT,
+                    from_chat_id=SOURCE_CHAT,
+                    message_id=message.id
+                )
+
+                print(f"Forwarded: {message.id}")
+                await asyncio.sleep(5)
+                return
+
+            except FloodWait as e:
+                wait = e.value + 2
+                print(f"FloodWait {e.value}s -> Sleeping {wait}s")
+                await asyncio.sleep(wait)
+
+            except Exception as err:
+                print(f"Failed {message.id}: {err}")
+                return
+
