@@ -186,7 +186,7 @@ async def live_forward(client, message):
             try:
                 await client.copy_message(
                     chat_id=DUMP_CHAT,
-                    from_chat_id=SOURCE_CHAT,
+                    from_chat_id=message.chat.id,
                     message_id=message.id
                 )
 
