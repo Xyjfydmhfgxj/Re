@@ -75,7 +75,7 @@ db = Database(Config.DB_URL, Config.DB_NAME)
 processing = False
 SYD = [1, 2, 4, 5, 5, 8, 10, 10, 15, 30, 60]
 
-@Client.on_message((filters.document | filters.audio | filters.video) & filters.channel)
+#@Client.on_message((filters.document | filters.audio | filters.video) & filters.channel)
 async def refnc(client, message):
     global processing
 
