@@ -94,8 +94,8 @@ class Bot(Client):
             except Exception as e:
                 logging.info(f"{e}")
                 
-        if await db.count() != 0:
-            asyncio.create_task(process_queue(self))
+        #if await db.count() != 0:
+          #  asyncio.create_task(process_queue(self))
 
         for id in Config.ADMIN:
             try:
