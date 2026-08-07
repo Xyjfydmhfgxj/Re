@@ -6,7 +6,7 @@ API_ID = Config.API_ID
 API_HASH = Config.API_HASH
 ADMINS = Config.ADMIN
 
-@Client.on_message(filters.command("clone") & filters.user(ADMINS))
+#@Client.on_message(filters.command("clone") & filters.user(ADMINS))
 async def clone_menu(client, message):
     if len(message.command) == 1:
         return await message.reply_text("**__Give The ᴅᴜᴍᴩ ᴄʜᴀɴɴᴇʟ ɪᴅ__\n\nExᴀᴍᴩʟᴇ:- `/set_dump -1002042969565`**")
@@ -30,7 +30,7 @@ USERNAME_REGEX = re.compile(
     re.IGNORECASE
 )
 
-@Client.on_message(filters.command("search"))
+#@Client.on_message(filters.command("search"))
 async def search_usernames(bot: Client, message):
     try:
         args = message.text.split()
@@ -99,7 +99,7 @@ import os
 
 
 
-@Client.on_message(filters.command("fetch") & filters.private)
+#@Client.on_message(filters.command("fetch") & filters.private)
 async def fetch_members(client: Client, message: Message):
     # Extract IDs from the command
     cmd_parts = message.text.split()
