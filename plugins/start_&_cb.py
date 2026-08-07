@@ -12,8 +12,10 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import raw
 logger = logging.getLogger(__name__)
 
-#@Client.on_message(filters.private & filters.command("start"))
+@Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
+    await message.reply_text(".")
+    return 
 
     if message.from_user.id in Config.BANNED_USERS:
         await message.reply_text("Sorry, You are banned.")
